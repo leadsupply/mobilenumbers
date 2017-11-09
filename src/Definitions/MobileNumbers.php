@@ -107,6 +107,22 @@ abstract class MobileNumbers implements MobileNumbersContract
 
 
     /**
+     * Return definition info.
+     *
+     * @return array
+     */
+    public function getDefinition(): array
+    {
+        return [
+            'country_alpha_code' => $this->country_alpha_code,
+            'country_code'       => '+' . $this->country_code,
+            'country_flag'       => $this->country_flag,
+            'valid_prefix_codes' => $this->valid_prefix_codes
+        ];
+    }
+
+
+    /**
      * Validate phone number.
      *
      * @param $number

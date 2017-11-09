@@ -100,4 +100,15 @@ class Validator
         return $this->definition->addCountryCode($number);
     }
 
+
+    /**
+     * Return definition info.
+     * 
+     * @return array
+     */
+    public function getDefinition() : array
+    {
+        return $this->definition->getDefinition();
+    }
+
 }

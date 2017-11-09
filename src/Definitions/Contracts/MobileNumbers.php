@@ -42,4 +42,12 @@ interface MobileNumbers
     public function addCountryCode($number) : string;
 
 
+    /**
+     * Get definition info.
+     * 
+     * @return array
+     */
+    public function getDefinition() : array;
+
+
 }
