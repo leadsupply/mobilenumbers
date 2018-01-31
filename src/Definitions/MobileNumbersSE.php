@@ -47,6 +47,7 @@ class MobileNumbersSE extends MobileNumbers implements MobileNumbersContract
         '072'      => ['min' => 7, 'max' => 7],
         '073'      => ['min' => 7, 'max' => 7],
         '076'      => ['min' => 7, 'max' => 7],
+        '079'      => ['min' => 7, 'max' => 7]
     ];
 
 
