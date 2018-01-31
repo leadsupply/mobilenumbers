@@ -44,6 +44,7 @@ class MobileNumbersDK extends MobileNumbers implements MobileNumbersContract
     protected $valid_prefix_codes = [
         '2'      => ['min' => 7, 'max' => 7],
         '30'     => ['min' => 6, 'max' => 6],
+        '31'     => ['min' => 6, 'max' => 6],
         '40'     => ['min' => 6, 'max' => 6],
         '41'     => ['min' => 6, 'max' => 6],
         '42'     => ['min' => 6, 'max' => 6],
