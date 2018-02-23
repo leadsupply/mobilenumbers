@@ -11,11 +11,14 @@ A library that validate and parse mobile phone numbers.
 
 Right now only phone numbers from the following countries are validated:
 
-- Spain
-- Denmark
-- Norway
-- Poland
-- Sweden
+|Country|Code|
+|:-------|----|
+|Spain   | ES |
+|Denmark | DK |
+|Norway  | NO |
+|Poland  | PL |
+|Sweden  | SE |
+|Finland | FI |
 
 Feel free to to fork this project and add new countries.
 
@@ -63,6 +66,7 @@ It is also possible to add a valid country code to number without country code:
 or stripe the country code
 
         Validator::country('SE')->stripCountryCode('0046737321066');   // 0737321066
+        Validator::country('FI')->stripCountryCode('00358411234567');  // 0411234567
         Validator::country('ES')->stripCountryCode('+34670862595');    // 670862595
         
 
