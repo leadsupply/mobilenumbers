@@ -84,4 +84,4 @@ Other methods:
 
 ## Backers and contributors
 
-- [Matchbanker.fi](Matchbanker.fi) (Backer)
+- [Matchbanker.fi](https://matchbanker.fi) (Backer)
