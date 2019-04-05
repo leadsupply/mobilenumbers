@@ -81,3 +81,7 @@ Other methods:
 1. Fork this project
 2. Add a new definition into ./src/Definitions
 3. Add a new unit test into ./tests/Definitions
+
+## Backers and contributors
+
+- [Matchbanker.fi](Matchbanker.fi) (Backer)
