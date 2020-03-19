@@ -3,7 +3,7 @@
     "description": "An international mobile number validator",
     "type": "library",
     "require": {
-	    "php": ">=7.0",
+	    "php": ">=7.1",
         "haydenpierce/class-finder": "^0.4.0"
     },
     "require-dev": {
