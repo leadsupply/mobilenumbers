@@ -36,4 +36,33 @@ class HelperTest extends TestCase
         }
 
     }
+
+
+    /**
+     * Test all definitions.
+     *
+     * @group Juanparati.mobilenumbers
+     * @throws \Exception
+     */
+    public function test_definitions()
+    {
+        $definitions = Helper::getAllDefinitions();
+
+        $this->assertNotEmpty($definitions);
+
+        foreach ($definitions as $definition)
+        {
+            $this->assertArrayHasKey('country_alpha_code', $definition);
+            $this->assertArrayHasKey('country_code', $definition);
+            $this->assertArrayHasKey('country_flag', $definition);
+            $this->assertArrayHasKey('valid_prefix_codes', $definition);
+            $this->assertNotEmpty('valid_prefix_codes', $definition);
+
+            foreach ($definition['valid_prefix_codes'] as $valid_prefix)
+            {
+                $this->assertArrayHasKey('min', $valid_prefix);
+                $this->assertArrayHasKey('min', $valid_prefix);
+            }
+        }
+    }
 }

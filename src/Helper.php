@@ -4,8 +4,18 @@
 namespace Juanparati\MobileNumbers;
 
 
+use HaydenPierce\ClassFinder\ClassFinder;
+
 class Helper
 {
+
+    /**
+     * Internal cache used by getAllDefinitions.
+     *
+     * @var array|null
+     */
+    protected static $definitions_cache = null;
+
 
     /**
      * Check if phone number has an international prefix code.
@@ -47,5 +57,31 @@ class Helper
             return '+' . preg_replace('~\D~', '', substr($number, 1));
 
         return preg_replace('~\D~', '', $number);
+    }
+
+
+    /**
+     * Obtain all the available definitions.
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public static function getAllDefinitions() : array
+    {
+        // Reflection is very expensive, so it's a good idea to use a static cache.
+        if (static::$definitions_cache)
+            return static::$definitions_cache;
+
+        $classes = ClassFinder::getClassesInNamespace('Juanparati\MobileNumbers\Definitions');
+
+        $classes = array_filter($classes, function ($class) {
+           return preg_match('/^Juanparati\\\\MobileNumbers\\\\Definitions\\\\MobileNumbers[A-Z][A-Z]$/', $class);
+        });
+
+        static::$definitions_cache = array_map(function ($class) {
+            return (new $class)->getDefinition();
+        }, $classes);
+
+        return static::$definitions_cache;
     }
 }

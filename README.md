@@ -74,7 +74,16 @@ Other methods:
 
         Validator::countr('ES')->helper->hasCountryCode('0030670862595'); // True
         Validator::country('ES')->hasValidCountryCode('0030670862595');  // False
-        
+
+
+## Definitions list
+
+Using the helper method "getAllDefinitions" it will obtain the information about the all the codes used in all the definitions:
+
+        $definitions = Helper::getAllDefinitions();
+
+The definitions include country prefix code, country code and country flag information.
+
 
 ## Add your country definition
 
