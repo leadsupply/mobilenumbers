@@ -74,6 +74,25 @@ Other methods:
 
         Validator::countr('ES')->helper->hasCountryCode('0030670862595'); // True
         Validator::country('ES')->hasValidCountryCode('0030670862595');  // False
+
+
+## Definitions list
+
+Using the helper method "getAllDefinitions" it will obtain the information about the all the codes used in all the definitions:
+
+        $definitions = Helper::getAllDefinitions();
+
+The definitions include country prefix code, country code and country flag information.
+
+
+## Identify phone numbers
+
+Using the helper method "identifyNumber" is possible the identify the country which belongs the phone number.
+The phone number should contains the international prefix.
+
+Example:
+
+        Helper::identifyNumber('+4560514180');  // Returns DK
         
 
 ## Add your country definition
@@ -81,3 +100,7 @@ Other methods:
 1. Fork this project
 2. Add a new definition into ./src/Definitions
 3. Add a new unit test into ./tests/Definitions
+
+## Backers and contributors
+
+- [Matchbanker.fi](https://matchbanker.fi) (Backer)

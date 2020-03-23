@@ -4,6 +4,16 @@
 namespace Juanparati\MobileNumbers;
 
 
+use HaydenPierce\ClassFinder\ClassFinder;
+use Juanparati\MobileNumbers\Definitions\Contracts\MobileNumbers;
+use Juanparati\MobileNumbers\Definitions\MobileNumbersDK;
+
+
+/**
+ * Class Helper.
+ *
+ * @package Juanparati\MobileNumbers
+ */
 class Helper
 {
 
@@ -47,5 +57,48 @@ class Helper
             return '+' . preg_replace('~\D~', '', substr($number, 1));
 
         return preg_replace('~\D~', '', $number);
+    }
+
+
+    /**
+     * Identify a phone number.
+     *
+     * @param string $number
+     * @return string|null
+     * @throws Exceptions\ValidatorException
+     */
+    public static function identifyNumber(string $number) : ?string
+    {
+        $codes = array_keys(Register::getAll());
+
+
+        foreach ($codes as $country_code)
+        {
+            $validator = Validator::country($country_code);
+
+            if ($validator->hasValidCountryCode($number) && $validator->isValid($number))
+                return $country_code;
+        }
+
+        return null;
+    }
+
+
+    /**
+     * Obtain all the available definitions.
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public static function getAllDefinitions() : array
+    {
+        $classes = Register::getAll();
+
+        /** @var array $definitions */
+        $definitions = array_map(function (string $class) {
+            return (new $class)->getDefinition();
+        }, $classes);
+
+        return $definitions;
     }
 }
