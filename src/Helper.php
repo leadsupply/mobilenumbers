@@ -5,17 +5,17 @@ namespace Juanparati\MobileNumbers;
 
 
 use HaydenPierce\ClassFinder\ClassFinder;
+use Juanparati\MobileNumbers\Definitions\Contracts\MobileNumbers;
+use Juanparati\MobileNumbers\Definitions\MobileNumbersDK;
 
+
+/**
+ * Class Helper.
+ *
+ * @package Juanparati\MobileNumbers
+ */
 class Helper
 {
-
-    /**
-     * Internal cache used by getAllDefinitions.
-     *
-     * @var array|null
-     */
-    protected static $definitions_cache = null;
-
 
     /**
      * Check if phone number has an international prefix code.
@@ -61,6 +61,30 @@ class Helper
 
 
     /**
+     * Identify a phone number.
+     *
+     * @param string $number
+     * @return string|null
+     * @throws Exceptions\ValidatorException
+     */
+    public static function identifyNumber(string $number) : ?string
+    {
+        $codes = array_keys(Register::getAll());
+
+
+        foreach ($codes as $country_code)
+        {
+            $validator = Validator::country($country_code);
+
+            if ($validator->hasValidCountryCode($number) && $validator->isValid($number))
+                return $country_code;
+        }
+
+        return null;
+    }
+
+
+    /**
      * Obtain all the available definitions.
      *
      * @return array
@@ -68,20 +92,13 @@ class Helper
      */
     public static function getAllDefinitions() : array
     {
-        // Reflection is very expensive, so it's a good idea to use a static cache.
-        if (static::$definitions_cache)
-            return static::$definitions_cache;
+        $classes = Register::getAll();
 
-        $classes = ClassFinder::getClassesInNamespace('Juanparati\MobileNumbers\Definitions');
-
-        $classes = array_filter($classes, function ($class) {
-           return preg_match('/^Juanparati\\\\MobileNumbers\\\\Definitions\\\\MobileNumbers[A-Z][A-Z]$/', $class);
-        });
-
-        static::$definitions_cache = array_map(function ($class) {
+        /** @var array $definitions */
+        $definitions = array_map(function (string $class) {
             return (new $class)->getDefinition();
         }, $classes);
 
-        return static::$definitions_cache;
+        return $definitions;
     }
 }

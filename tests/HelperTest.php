@@ -65,4 +65,19 @@ class HelperTest extends TestCase
             }
         }
     }
+
+
+    /**
+     * Test number identificator.
+     *
+     * @group Juanparati.mobilenumbers
+     * @throws \Juanparati\MobileNumbers\Exceptions\ValidatorException
+     */
+    public function test_identify_number()
+    {
+        $this->assertEquals('DK', Helper::identifyNumber('+4560514180'));
+        $this->assertEquals('ES', Helper::identifyNumber('0034717163140'));
+        $this->assertEquals('FI', Helper::identifyNumber('+358501234567'));
+        $this->assertNull(Helper::identifyNumber('34717163140'));
+    }
 }

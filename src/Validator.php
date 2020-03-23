@@ -3,7 +3,9 @@
 namespace Juanparati\MobileNumbers;
 
 
+
 use Juanparati\MobileNumbers\Definitions\Contracts\MobileNumbers as MobileNumbersContract;
+use Juanparati\MobileNumbers\Exceptions\ValidatorException;
 
 /**
  * Validator helper class.
@@ -31,10 +33,15 @@ class Validator
      * Validator constructor.
      *
      * @param $country_code
+     * @throws ValidatorException
      */
     public function __construct($country_code)
     {
-        $definition_class = 'Juanparati\\MobileNumbers\\Definitions\\MobileNumbers' . strtoupper($country_code);
+        $definition_class = Register::get($country_code);
+
+        if (!$definition_class)
+            throw new ValidatorException("Class definition for $country_code not found", 0);
+
         $this->definition = new $definition_class();
 
         $this->helper = Helper::class;
@@ -46,6 +53,7 @@ class Validator
      *
      * @param $country_code
      * @return static
+     * @throws ValidatorException
      */
     public static function country($country_code) : Validator
     {
@@ -103,7 +111,7 @@ class Validator
 
     /**
      * Return definition info.
-     * 
+     *
      * @return array
      */
     public function getDefinition() : array

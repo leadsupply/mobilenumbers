@@ -85,6 +85,16 @@ Using the helper method "getAllDefinitions" it will obtain the information about
 The definitions include country prefix code, country code and country flag information.
 
 
+## Identify phone numbers
+
+Using the helper method "identifyNumber" is possible the identify the country which belongs the phone number.
+The phone number should contains the international prefix.
+
+Example:
+
+        Helper::identifyNumber('+4560514180');  // Returns DK
+        
+
 ## Add your country definition
 
 1. Fork this project
