@@ -1,12 +1,6 @@
 <?php
 
-
 namespace Juanparati\MobileNumbers;
-
-
-use HaydenPierce\ClassFinder\ClassFinder;
-use Juanparati\MobileNumbers\Definitions\Contracts\MobileNumbers;
-use Juanparati\MobileNumbers\Definitions\MobileNumbersDK;
 
 
 /**
@@ -70,7 +64,6 @@ class Helper
     public static function identifyNumber(string $number) : ?string
     {
         $codes = array_keys(Register::getAll());
-
 
         foreach ($codes as $country_code)
         {
